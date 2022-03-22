@@ -8,6 +8,8 @@ router.post('/user/login', Controller.doLogin)
 
 // router.use(authentication)
 
-router.get('/user/coin', Controller.getCoin)
+router.post('/user/card', Controller.stripeTokenRetrieve)
+
+router.patch('/user/update', Controller.stripeUpdateSubscription)
 
 module.exports = router
