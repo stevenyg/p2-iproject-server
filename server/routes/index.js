@@ -8,6 +8,6 @@ router.post('/user/login', Controller.doLogin)
 
 // router.use(authentication)
 
-router.get('/user/coin', Controller.getCoin)
+// router.get('/user/coin', Controller.getCoin)
 
 module.exports = router

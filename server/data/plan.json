@@ -1,20 +1,20 @@
 [
     {
-        "type": "free",
+        "type": "Basic",
         "price": 0,
         "duration": 1,
-        "StripePlanId": 1
+        "StripePlanId": "price_1Kg17MFHOJ7vfyPMRkJje6lt"
     },
     {
-        "type": "basic",
-        "price": 0,
+        "type": "Pro",
+        "price": 50000,
         "duration": 1,
-        "StripePlanId": 2
+        "StripePlanId": "price_1Kg1GaFHOJ7vfyPMUKyAwuQe"
     },
     {
-        "type": "pro",
-        "price": 0,
+        "type": "Expert",
+        "price": 100000,
         "duration": 1,
-        "StripePlanId": 3
+        "StripePlanId": "price_1Kg1GaFHOJ7vfyPMZuB8ZNb8"
     }
 ]
