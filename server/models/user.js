@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     StripeUserId: DataTypes.STRING,
+    StripeSubscriptionId: DataTypes.STRING,
     StripeCardId: DataTypes.STRING,
     PlanId: DataTypes.INTEGER
   }, {

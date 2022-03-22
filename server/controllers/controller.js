@@ -74,10 +74,65 @@ class Controller {
         }
     }
 
-    static async updateSubscription(req, res) {
+    // static async updateSubscription(req, res) {
+    //     try {
+
+    //         // const data = User.update()
+
+    //     } catch (error) {
+    //         console.log(error);
+    //         res.status(500).json({ message: "Internal Server Error" })
+    //     }
+    // }
+
+    static async stripeTokenRetrieve(req, res) {
         try {
 
-            // const data = User.update()
+            const { token, email } = req.body
+
+
+            const data = await User.findOne({ where: { email } })
+
+
+            const card = await stripe.customers.createSource(
+                data.StripeUserId,
+                { source: token.id }
+            );
+            console.log(card);
+
+            const response = await User.update(
+                {
+                    StripeCardId: card.id
+                }, {
+                where: {
+                    email: data.email
+                }
+            })
+            console.log(response);
+            res.status(200).json({ message: "StripeCardId add success" })
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: "Internal Server Error" })
+        }
+    }
+
+    static async stripeUpdateSubscription(req, res) {
+        try {
+            // PlanId = new PlanId
+            const { email, PlanId } = req.body
+
+            const data = await User.findOne({ email })
+
+            const data2 = await Plan.findOne({ id: PlanId })
+
+            const subscription = await stripe.subscriptions.update(data.StripeSubscriptionId, {
+                items: [
+                    { price: data2.StripePlanId },
+                ],
+            });
+
+            res.status(200).json({ message: 'Stripe Subscription Updated' })
 
         } catch (error) {
             console.log(error);

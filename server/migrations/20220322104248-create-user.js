@@ -17,6 +17,9 @@ module.exports = {
       StripeUserId: {
         type: Sequelize.STRING
       },
+      StripeSubscriptionId: {
+        type: Sequelize.STRING
+      },
       StripeCardId: {
         type: Sequelize.STRING
       },
