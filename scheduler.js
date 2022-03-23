@@ -3,9 +3,7 @@ const axios = require('axios');
 
 const scheduler = async (req, res) => {
     try {
-        const response = await axios.get("http://localhost:3000/user/email")
-
-
+        const response = await axios.get("https://uppsalafox21-coin.herokuapp.com/user/email")
 
         response.data.forEach(element => {
 
