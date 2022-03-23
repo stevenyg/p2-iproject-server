@@ -7,7 +7,6 @@ const scheduler = async (req, res) => {
 
         response.data.forEach(element => {
 
-
             const randomer = Math.floor(Math.random() * 5);
             let text = ""
 
