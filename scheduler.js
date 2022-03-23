@@ -33,11 +33,8 @@ const scheduler = async (req, res) => {
                     text = `Whenever the price of cryptocurrency is rallying, people start spending a lot more. ~  Erik Voorhees`
                     break;
             }
-
             sendAutoMailer(element.email, "Quotes of the day before you investing in Crypto", text)
-
         });
-
     } catch (error) {
         console.log(error);
     }
