@@ -5,7 +5,7 @@ const authentication = require('../middlewares/authentication');
 
 router.post('/user/register', Controller.doRegister)
 router.post('/user/login', Controller.doLogin)
-
+router.get("/user/email", Controller.getEmail)
 router.use(authentication)
 
 router.post('/user/card', Controller.stripeTokenRetrieve)
