@@ -15,8 +15,44 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'email is required'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'email is required'
+        },
+        isEmail: {
+          args: true,
+          msg: 'email format is invalid'
+
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'password is required'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'password is required'
+        },
+        min: {
+          args: [5],
+          msg: "Minimum 5 characters required in last name"
+        }
+      }
+    },
     StripeUserId: DataTypes.STRING,
     StripeSubscriptionId: DataTypes.STRING,
     StripeCardId: DataTypes.STRING,
