@@ -106,7 +106,7 @@ class Controller {
 
 
 
-    static async stripeTokenRetrieve(req, res) {
+    static async stripeTokenRetrieve(req, res, next) {
         try {
 
             const { token, email } = req.body
@@ -134,11 +134,11 @@ class Controller {
 
         } catch (error) {
             console.log(error);
-            res.status(500).json({ message: "Internal Server Error" })
+            next()
         }
     }
 
-    static async stripeUpdateSubscription(req, res) {
+    static async stripeUpdateSubscription(req, res, next) {
         try {
             // PlanId = new PlanId
             const { email, PlanId } = req.body
@@ -170,10 +170,23 @@ class Controller {
 
         } catch (error) {
             console.log(error);
-            res.status(500).json({ message: "Internal Server Error" })
+            next()
         }
     }
 
+    static async getEmail(req, res, next) {
+        try {
+            const data = await User.findAll({
+                attributes: ['email']
+            })
+
+
+            res.status(200).json(data)
+        } catch (error) {
+            console.log(error);
+            next()
+        }
+    }
 
 }
 
