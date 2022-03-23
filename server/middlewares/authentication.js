@@ -1,15 +1,13 @@
 const { compareToken } = require("../helpers/jwt")
 const { User } = require('../models/index');
 
-const authentication = (req, res) => {
-
-
+const authentication = async (req, res, next) => {
     try {
         const { access_token } = req.headers
 
         const payload = compareToken(access_token)
 
-        const userFound = User.findByPk(payload.id)
+        const userFound = await User.findByPk(payload.id)
 
         if (!userFound) {
             throw {
