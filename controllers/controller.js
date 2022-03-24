@@ -3,6 +3,7 @@ const { createToken } = require('../helpers/jwt');
 const { User, Plan, UserPlan } = require('../models/index');
 const { Op } = require("sequelize");
 const { sendAutoMailer } = require('../helpers/nodemailer');
+const { json } = require('body-parser');
 const stripe = require('stripe')('sk_test_51KZVEYFHOJ7vfyPMdIRaLdYd3lnAG9GoSboaey78oq1Fry6qchHQ8y39AP9svT4qYzPNOVdN88EHMs062knU5MWy00GrDE6Qgp');
 
 
@@ -74,10 +75,6 @@ class Controller {
                 );
             }
 
-
-
-
-
             const payload = {
                 id: data.id,
                 email: data.email,
@@ -134,7 +131,7 @@ class Controller {
 
         } catch (error) {
             console.log(error);
-            next()
+            next(error)
         }
     }
 
@@ -170,7 +167,7 @@ class Controller {
 
         } catch (error) {
             console.log(error);
-            next()
+            next(error)
         }
     }
 
@@ -185,6 +182,47 @@ class Controller {
         } catch (error) {
             console.log(error);
             next()
+        }
+    }
+
+    static async getUser(req, res, next) {
+        try {
+            const email = req.userLoggedIn.email
+
+            const data = await User.findOne({
+                where: {
+                    email
+                }
+            })
+            console.log(data);
+
+            if (!email) {
+                throw {
+                    code: 401,
+                    name: "AuthenticationError",
+                    message: "User No Found"
+                }
+            }
+
+            let isCardSaved = false
+            if (data.StripeCardId !== null) {
+                isCardSaved = true
+            }
+
+            let card = {}
+
+            if (data.StripeCardId) {
+                card = await stripe.customers.retrieveSource(
+                    data.StripeUserId,
+                    data.StripeCardId
+                );
+            }
+
+            res.status(200).json({ email: data.email, PlanId: data.PlanId, isCardSaved, card })
+
+        } catch (error) {
+            console.log(error);
+            next(error)
         }
     }
 

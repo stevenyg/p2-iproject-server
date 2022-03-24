@@ -8,6 +8,7 @@ router.post('/user/login', Controller.doLogin)
 router.get("/user/email", Controller.getEmail)
 router.use(authentication)
 
+router.get('/user/data', Controller.getUser)
 router.post('/user/card', Controller.stripeTokenRetrieve)
 router.patch('/user/update', Controller.stripeUpdateSubscription)
 
