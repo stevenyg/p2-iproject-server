@@ -1,0 +1,20 @@
+[
+    {
+        "type": "Basic",
+        "price": 0,
+        "duration": 1,
+        "StripePlanId": "price_1Kg17MFHOJ7vfyPMRkJje6lt"
+    },
+    {
+        "type": "Pro",
+        "price": 50000,
+        "duration": 1,
+        "StripePlanId": "price_1Kg1GaFHOJ7vfyPMUKyAwuQe"
+    },
+    {
+        "type": "Expert",
+        "price": 100000,
+        "duration": 1,
+        "StripePlanId": "price_1Kg1GaFHOJ7vfyPMZuB8ZNb8"
+    }
+]
